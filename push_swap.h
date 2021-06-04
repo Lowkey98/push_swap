@@ -20,4 +20,6 @@ void rra(t_stack *s);
 void rrb(t_stack *s);
 void pa(t_stack *s);
 void pb(t_stack *s);
+void sort_three(t_stack *s);
+void sort_five(t_stack *s);
 #endif

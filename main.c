@@ -32,10 +32,7 @@ int main(int argc,char **argv)
     s.stack_a = fill_a(argc,argv);
     s.stack_b = malloc((argc - 1) * sizeof(int));
     s.top_b = -1;
-    pb(&s);
-    pb(&s);
-    pb(&s);
-    pa(&s);
+    sort_three(&s);
     //print_stack(s.stack_b,s.top_b + 1);
     print_stack(s.stack_a,s.top_a + 1);
     return (0);
