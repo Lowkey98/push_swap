@@ -28,4 +28,5 @@ int ft_is_digit(char c);
 void    ft_error(int argc, char **argv);
 int ft_is_digit(char c);
 int	ft_strcmp(char *s1, char *s2);
+int ft_strlen(char *str);
 #endif
