@@ -70,6 +70,7 @@ int main(int argc,char **argv)
 {
     t_stack s;
     
+    ft_error(argc,argv);
     s.top_a = argc - 2;
     s.tab_len = argc - 1;
     s.stack_a = malloc((argc - 1) * sizeof(int));

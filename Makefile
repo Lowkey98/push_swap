@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SRC = main.c ft_atoi.c a_operations.c b_operations.c sort_three.c
+SRC = main.c ft_atoi.c a_operations.c b_operations.c sort_three.c ft_error.c ft_is_digit.c ft_strcmp.c
 
 FLAG = gcc -Wall -Wextra -Werror -fsanitize=address
 
