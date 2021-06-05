@@ -8,8 +8,10 @@ typedef struct stack
 {
     int *stack_a;
     int *stack_b;
+    int *tab;
     int top_a;
     int top_b;
+    int tab_len;
 } t_stack;
 int	ft_atoi(const char *str);
 void sa(t_stack * s);
