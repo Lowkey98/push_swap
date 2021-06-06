@@ -12,7 +12,7 @@ void sort_five(t_stack *s)
         if ((s->tab[0] == s->stack_a[i]) || (s->tab[1] == s->stack_a[i]))
         {
             while (s->tab[0] != s->stack_a[s->top_a] && (s->tab[1] != s->stack_a[s->top_a]))
-                ra(s);
+                rra(s);
             pb(s);
             j = s->top_a;
             i = 0;
@@ -21,7 +21,7 @@ void sort_five(t_stack *s)
         if ((s->tab[0] == s->stack_a[j]) || (s->tab[1] == s->stack_a[j]))
         {
             while ((s->tab[0] != s->stack_a[s->top_a]) && (s->tab[1] != s->stack_a[s->top_a]))
-                rra(s);
+                ra(s);
             pb(s);
             j = s->top_a;
             i = 0;

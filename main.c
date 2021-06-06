@@ -62,9 +62,49 @@ void print_stack(int *stack, int len)
     i = 0;
     while (i < len)
     {
-        printf("%d",stack[len - i - 1]);
+        printf("--%d",stack[len - i - 1]);
         i++;
     }
+}
+void push_in_b(t_stack *s)
+{
+    int diviser;
+    int i;
+    int j;
+    int k;
+
+    diviser = 3;
+    if (diviser > s->tab_len)
+        diviser = s->tab_len;
+    i = s->top_a;
+    k = 0;
+    j = 0;
+    while ((diviser * k)  < s->tab_len)
+    {
+        while (i > 0)
+        {
+            while (j < diviser)
+            {
+                if (j + (diviser * k) < s->tab_len && s->tab[j + (diviser * k)] == s->stack_a[i])
+                {
+                    if (i < (s->top_a / 2))
+                        while (s->tab[j + (diviser * k)] != s->stack_a[s->top_a])
+                            ra(s);
+                    else
+                        while (s->tab[j + (diviser * k)] != s->stack_a[s->top_a])
+                            rra(s);
+                    pb(s);
+                    i = s->top_a;
+                }
+                j++;
+            }
+            i--;
+            j = 0;
+        }
+        k++;
+        i = s->top_a;
+    }
+    //pb(s);
 }
 int main(int argc,char **argv)
 {
@@ -78,13 +118,15 @@ int main(int argc,char **argv)
     s.tab = malloc((argc - 1) * sizeof(int));
     s.top_b = -1;
     fill_a(&s,argc,argv);
-    sort_five(&s);
+    //sort_five(&s);
+    push_in_b(&s);
     //sort_three(&s);
-    //print_stack(s.stack_b,s.top_b + 1);
+    print_stack(s.stack_b,s.top_b + 1);
     // ra(&s);
     // pb(&s);
     // ra(&s);
     //printf("%d",s.stack_a[s.top_a]);
-    print_stack(s.stack_a,s.top_a + 1);
+    
+    //print_stack(s.stack_a,s.top_a + 1);
     return (0);
 }
