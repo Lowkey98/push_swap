@@ -44,12 +44,13 @@ void rrb(t_stack *s)
     }
     write(1,"rrb\n",4);
 }
-void pb(t_stack *s)
+int pb(t_stack *s)
 {
     if (s->top_a == -1)
-        return;
+        return (0);
     s->stack_b[s->top_b + 1] = s->stack_a[s->top_a];
     s->top_b++;
     s->top_a--;
     write(1,"pb\n",3);
+    return (1);
 }

@@ -66,45 +66,49 @@ void print_stack(int *stack, int len)
         i++;
     }
 }
-void push_in_b(t_stack *s)
+void push_in_b(t_stack *s, int start, int end)
 {
-    int diviser;
-    int i;
     int j;
-    int k;
+    int i;
 
-    diviser = 3;
-    if (diviser > s->tab_len)
-        diviser = s->tab_len;
-    i = s->top_a;
-    k = 0;
+    i = start;
     j = 0;
-    while ((diviser * k)  < s->tab_len)
+    while (j < s->top_a)
     {
-        while (i > 0)
+        while (i < end)
         {
-            while (j < diviser)
+            if (s->stack_a[s->top_a - j] == s->tab[i])
             {
-                if (j + (diviser * k) < s->tab_len && s->tab[j + (diviser * k)] == s->stack_a[i])
-                {
-                    if (i < (s->top_a / 2))
-                        while (s->tab[j + (diviser * k)] != s->stack_a[s->top_a])
-                            ra(s);
-                    else
-                        while (s->tab[j + (diviser * k)] != s->stack_a[s->top_a])
-                            rra(s);
-                    pb(s);
-                    i = s->top_a;
-                }
-                j++;
+                if (j < (s->top_a / 2))
+                    while (s->tab[i] != s->stack_a[s->top_a])
+                        rra(s);
+                else
+                    while (s->tab[i] != s->stack_a[s->top_a])
+                        ra(s);
+                pb(s);
+                j = 0;
             }
-            i--;
-            j = 0;
+            i++;
         }
-        k++;
-        i = s->top_a;
+        i = start;
+        j++;
     }
-    //pb(s);
+    
+}
+void sort_a(t_stack *s)
+{
+    int i;
+    int divider;
+
+    i = 0;
+    divider = 5;
+
+    while ((i + 1) * divider < s->tab_len)
+    {
+        push_in_b(s,i * divider,(divider * i) + divider);
+        i++;
+    }
+    while(pb(s));
 }
 int main(int argc,char **argv)
 {
@@ -119,7 +123,7 @@ int main(int argc,char **argv)
     s.top_b = -1;
     fill_a(&s,argc,argv);
     //sort_five(&s);
-    push_in_b(&s);
+    sort_a(&s);
     //sort_three(&s);
     print_stack(s.stack_b,s.top_b + 1);
     // ra(&s);
