@@ -60,11 +60,17 @@ void print_stack(int *stack, int len)
     int i;
 
     i = 0;
+        printf("------------\n");
+
     while (i < len)
     {
-        printf("--%d",stack[len - i - 1]);
+        printf("%d\n",stack[len - i - 1]);
+       
         i++;
+
     }
+        printf("------------\n");
+    
 }
 void push_in_b(t_stack *s, int start, int end)
 {
@@ -81,10 +87,10 @@ void push_in_b(t_stack *s, int start, int end)
             {
                 if (j < (s->top_a / 2))
                     while (s->tab[i] != s->stack_a[s->top_a])
-                        rra(s);
+                        ra(s);
                 else
                     while (s->tab[i] != s->stack_a[s->top_a])
-                        ra(s);
+                        rra(s);
                 pb(s);
                 j = 0;
             }
@@ -93,15 +99,22 @@ void push_in_b(t_stack *s, int start, int end)
         i = start;
         j++;
     }
+    i = start;
+   
+    printf("\n");
     
+}
+int indexof(int x, int *tab)
+{
+
 }
 void sort_a(t_stack *s)
 {
     int i;
     int divider;
-
+    int index;
     i = 0;
-    divider = 5;
+    divider = 4;
 
     while ((i + 1) * divider < s->tab_len)
     {
@@ -109,6 +122,15 @@ void sort_a(t_stack *s)
         i++;
     }
     while(pb(s));
+    i = 0;
+    while (i < s->tab_len)
+    {
+        index = indexof(s->tab[s->tab_len - i - 1], s->stack_b);
+        if (index < s->top_b < 2)
+            while (s->stack_b[s->top_b] != s->stack_b[])
+        i++;
+    }
+ 
 }
 int main(int argc,char **argv)
 {
