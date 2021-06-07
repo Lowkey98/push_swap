@@ -1,36 +1,25 @@
-int	result(int i, const char *str, int sign)
-{
-	unsigned long num;
-
-	num = 0;
-	while (*(str + i) && str[i] >= '0' && str[i] <= '9')
-	{
-		num = num * 10 + str[i] - 48;
-		i++;
-	}
-	if (num > 9223372036854775807)
-		return ((sign > 0) ? (-1) : (0));
-	return (num * sign);
-}
-
 int	ft_atoi(const char *str)
 {
-	int				sign;
-	int				i;
+	int		i;
+	int		a;
+	long	somme;
 
-	sign = 1;
 	i = 0;
-	while (*(str + i) && (str[i] == ' ' || str[i] == '\r' || str[i] == '\n'
-		|| str[i] == '\t' || str[i] == '\f' || str[i] == '\v'))
-		i++;
-	if (str[i] == '-')
+	a = 1;
+	somme = 0;
+	while (str[i] <= 32 && str[i] > 0)
+		if (str[i++] == 27)
+			return (0);
+	if (str[i] == '-' || str[i] == '+')
+		if (str[i++] == '-')
+			a = -1;
+	while (str[i] != '\0' && (str[i] <= '9' && str[i] >= '0'))
 	{
-		sign = sign * -1;
-		i++;
+		if ((somme * a) < -2147483648)
+			return (0);
+		if ((somme * a) > 2147483647)
+			return (-1);
+		somme = (str[i++] - '0') + somme * 10;
 	}
-	else if (str[i] == '+')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-		return (0);
-	return (result(i, str, sign));
+	return (a * somme);
 }

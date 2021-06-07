@@ -1,158 +1,93 @@
 #include "push_swap.h"
-void	ft_sort_integer_table(int *tab, int size)
-{
-	int *end;
-	int *inner_head;
-	int *next_int;
-	int temp;
 
-	end = tab + size - 1;
-	while (tab < end)
+void	sort_table(int argc, t_stack *s)
+{
+	int	tmp;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < argc - 1)
 	{
-		inner_head = tab;
-		while (inner_head < end)
+		j = i + 1;
+		while (j < argc - 1)
 		{
-			next_int = inner_head + 1;
-			if (*inner_head > *next_int)
+			if (s->tab[i] > s->tab[j])
 			{
-				temp = *inner_head;
-				*inner_head = *next_int;
-				*next_int = temp;
+				tmp = s->tab[i];
+				s->tab[i] = s->tab[j];
+				s->tab[j] = tmp;
 			}
-			inner_head++;
+			j++;
 		}
-		end--;
+		i++;
 	}
 }
-void fill_a(t_stack *s, int argc, char **argv)
+
+void	fill_a(t_stack *s, int argc, char **argv)
 {
-    int i;
-    int j;
-    int tmp;
+	int	i;
+	int	j;
 
-    j = 0;
-    i = 0;
-    while (i < argc - 1)
-    {
-        s->stack_a[i] = ft_atoi(argv[argc - i - 1]);
-        s->tab[i] = s->stack_a[i];
-        i++;
-    }
-    i = 0;
-    while (i < argc - 1)
-    {
-        j = i + 1;
-        while (j < argc - 1)
-        {
-            if (s->tab[i] > s->tab[j])
-            {
-                tmp = s->tab[i];
-                s->tab[i] = s->tab[j];
-                s->tab[j] = tmp;
-            }
-                j++;
-        }
-        i++;
-    }
+	j = 0;
+	i = 0;
+	while (i < argc - 1)
+	{
+		s->stack_a[i] = ft_atoi(argv[argc - i - 1]);
+		s->tab[i] = s->stack_a[i];
+		i++;
+	}
+	sort_table(argc, s);
 }
-void print_stack(int *stack, int len)
-{   
-    int i;
 
-    i = 0;
-        printf("------------\n");
-
-    while (i < len)
-    {
-        printf("%d\n",stack[len - i - 1]);
-       
-        i++;
-
-    }
-        printf("------------\n");
-    
-}
-void push_in_b(t_stack *s, int start, int end)
+int	ft_divider(int n)
 {
-    int j;
-    int i;
-
-    i = start;
-    j = 0;
-    while (j < s->top_a)
-    {
-        while (i < end)
-        {
-            if (s->stack_a[s->top_a - j] == s->tab[i])
-            {
-                if (j < (s->top_a / 2))
-                    while (s->tab[i] != s->stack_a[s->top_a])
-                        ra(s);
-                else
-                    while (s->tab[i] != s->stack_a[s->top_a])
-                        rra(s);
-                pb(s);
-                j = 0;
-            }
-            i++;
-        }
-        i = start;
-        j++;
-    }
-    i = start;
-   
-    printf("\n");
-    
+	if (n > 150)
+		return (n / 12);
+	return (n / 6);
 }
-int indexof(int x, int *tab)
-{
 
-}
-void sort_a(t_stack *s)
+void	sort_a(t_stack *s)
 {
-    int i;
-    int divider;
-    int index;
-    i = 0;
-    divider = 4;
+	int	i;
+	int	divider;
 
-    while ((i + 1) * divider < s->tab_len)
-    {
-        push_in_b(s,i * divider,(divider * i) + divider);
-        i++;
-    }
-    while(pb(s));
-    i = 0;
-    while (i < s->tab_len)
-    {
-        index = indexof(s->tab[s->tab_len - i - 1], s->stack_b);
-        if (index < s->top_b < 2)
-            while (s->stack_b[s->top_b] != s->stack_b[])
-        i++;
-    }
- 
+	i = 0;
+	divider = ft_divider(s->tab_len);
+	while ((i + 1) * divider < s->tab_len)
+	{
+		push_in_b(s, i * divider, (divider * i) + divider);
+		i++;
+	}
+	while (s->top_a != -1)
+		pb(s);
+	push_in_a(s);
 }
-int main(int argc,char **argv)
+
+int	main(int argc, char **argv)
 {
-    t_stack s;
-    
-    ft_error(argc,argv);
-    s.top_a = argc - 2;
-    s.tab_len = argc - 1;
-    s.stack_a = malloc((argc - 1) * sizeof(int));
-    s.stack_b = malloc((argc - 1) * sizeof(int));
-    s.tab = malloc((argc - 1) * sizeof(int));
-    s.top_b = -1;
-    fill_a(&s,argc,argv);
-    //sort_five(&s);
-    sort_a(&s);
-    //sort_three(&s);
-    print_stack(s.stack_b,s.top_b + 1);
-    // ra(&s);
-    // pb(&s);
-    // ra(&s);
-    //printf("%d",s.stack_a[s.top_a]);
-    
-    //print_stack(s.stack_a,s.top_a + 1);
-    return (0);
+	t_stack	s;
+
+	ft_error(argc, argv);
+	s.top_a = argc - 2;
+	s.tab_len = argc - 1;
+	s.stack_a = (int *)malloc((argc - 1) * sizeof(int));
+	s.stack_b = malloc((argc - 1) * sizeof(int));
+	s.tab = malloc((argc - 1) * sizeof(int));
+	s.top_b = -1;
+	fill_a(&s, argc, argv);
+	if (is_sorted(s.stack_a, s.top_a))
+		return (0);
+	if (argc == 3)
+		sa(&s);
+	else if (argc == 4)
+		sort_three(&s);
+	else if (argc == 5)
+		sort_four(&s, 0);
+	else if (argc == 6)
+		sort_five(&s, 0);
+	else
+		sort_a(&s);
+	return (0);
 }
