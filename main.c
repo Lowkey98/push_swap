@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ayafdel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/07 19:39:56 by ayafdel           #+#    #+#             */
+/*   Updated: 2021/06/07 19:39:57 by ayafdel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	sort_table(int argc, t_stack *s)
@@ -68,14 +80,10 @@ void	sort_a(t_stack *s)
 int	main(int argc, char **argv)
 {
 	t_stack	s;
+	// char c;
 
 	ft_error(argc, argv);
-	s.top_a = argc - 2;
-	s.tab_len = argc - 1;
-	s.stack_a = (int *)malloc((argc - 1) * sizeof(int));
-	s.stack_b = malloc((argc - 1) * sizeof(int));
-	s.tab = malloc((argc - 1) * sizeof(int));
-	s.top_b = -1;
+	alloc(&s, argc);
 	fill_a(&s, argc, argv);
 	if (is_sorted(s.stack_a, s.top_a))
 		return (0);
@@ -89,5 +97,9 @@ int	main(int argc, char **argv)
 		sort_five(&s, 0);
 	else
 		sort_a(&s);
+	free(s.stack_a);
+	free(s.stack_b);
+	free(s.tab);
+	// read(0,&c,1);
 	return (0);
 }
